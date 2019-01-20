@@ -28,15 +28,15 @@ class ThirdViewController: UITableViewController, UINavigationControllerDelegate
             var _tastes = Array<TasteDB>()
             for i in snapshot.children{
                 let taste = TasteDB(snapshot: i as! DataSnapshot)
-                _tastes.append(taste)
-                print(taste)
-                
+                if taste.isAvailable == true{
+                    _tastes.append(taste)
+                    print(taste)
+                }
             }
             self?.tastes = _tastes
             self?.tableView.reloadData()
-        })
-        
-        
+        }
+        )
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
