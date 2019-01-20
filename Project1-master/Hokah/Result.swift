@@ -25,7 +25,7 @@ class Result: UIViewController, UINavigationControllerDelegate {
         guard let selectedTabacoo = selectedTabacoo else { return }
         guard let selectedFlavour = selectedFlavour else { return }
         
-        tableNumber.text = "Table \(selectedTable)"
+        tableNumber.text = "Table \(selectedTable+1)"
         tabacoo.text = selectedTabacoo
         flavour.text = selectedFlavour
     }

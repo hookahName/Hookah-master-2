@@ -66,6 +66,11 @@ class ViewController: UITableViewController {
         } else if segue.identifier == "ToTabaco" {
             guard let tobaco = segue.destination as? SeconViewController else {return}
             tobaco.tobaccos = tobaccos
+            if let indexPath = tableView.indexPathForSelectedRow {
+                tobaco.selectedTable = indexPath.row
+            }
+
+            
         }
     }
     
