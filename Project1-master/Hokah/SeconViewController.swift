@@ -12,6 +12,7 @@ class SeconViewController: UITableViewController, UINavigationControllerDelegate
     var ref: DatabaseReference!
     
     var tobaccos = Array<TobaccoDB>()
+    
     var selectedTable : Int?
 
     override func viewDidLoad() {
@@ -31,20 +32,6 @@ class SeconViewController: UITableViewController, UINavigationControllerDelegate
         return tobaccos.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TabacoCell", for: indexPath)
-        cell.textLabel?.text = tobaccos[indexPath.row].name
-        
-        if !tobaccos[indexPath.row].isAvailable {
-            print("ne ok")
-            cell.textLabel?.isEnabled = false
-            cell.selectionStyle = .none
-        }
-        
-        return cell
-    }
-    
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         guard let cell = tableView.cellForRow(at: indexPath) else {return nil}
         if cell.selectionStyle == .none {
@@ -52,6 +39,27 @@ class SeconViewController: UITableViewController, UINavigationControllerDelegate
         }
         return indexPath
     }
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TabacoCell", for: indexPath)
+        cell.textLabel?.text = tobaccos[indexPath.row].name
+        
+        if tobaccos[indexPath.row].isAvailable == false {
+            cell.textLabel?.isEnabled = false
+            cell.selectionStyle = .none
+        }
+            return cell
+//            {
+//            print("ne ok")
+//            cell.textLabel?.isEnabled = false
+//            cell.selectionStyle = .none
+//        }
+        
+        //return cell
+    }
+    
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         var messageText: String
@@ -72,6 +80,7 @@ class SeconViewController: UITableViewController, UINavigationControllerDelegate
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "ToFlavour" {
             guard let flavourController = segue.destination as? ThirdViewController else {return}
             flavourController.table = selectedTable
