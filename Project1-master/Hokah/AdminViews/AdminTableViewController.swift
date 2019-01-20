@@ -20,21 +20,6 @@ class AdminTableViewController: UITableViewController {
         title = "Available"
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        ref = Database.database().reference().child("tobaccos")
-        ref.observe(.value, with: { [weak self] (snapshot) in
-            var _tobaccos = Array<TobaccoDB>()
-            for i in snapshot.children{
-                let tobacco = TobaccoDB(snapshot: i as! DataSnapshot)
-                _tobaccos.append(tobacco)
-                
-            }
-            self?.tobaccos = _tobaccos
-            self?.tableView.reloadData()
-        })
-    }
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }

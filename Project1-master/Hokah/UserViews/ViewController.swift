@@ -12,7 +12,7 @@ class ViewController: UITableViewController {
     var ref: DatabaseReference!
     let tables = ["Table 1", "Table 2", "Table 3"]
     var tobaccos = Array<TobaccoDB>()
-    /*
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         ref = Database.database().reference().child("tobaccos")
@@ -27,7 +27,7 @@ class ViewController: UITableViewController {
             self?.tableView.reloadData()
         })
     }
-    */
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,7 +37,7 @@ class ViewController: UITableViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        //ref.removeAllObservers()
+        ref.removeAllObservers()
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -55,7 +55,7 @@ class ViewController: UITableViewController {
         
         return cell
     }
-    /*
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Admin" {
             guard let admin = segue.destination as? AdminTableViewController else {return}
@@ -76,6 +76,5 @@ class ViewController: UITableViewController {
             self.tobaccos = controller.tobaccos
         }
     }
- */
 }
 

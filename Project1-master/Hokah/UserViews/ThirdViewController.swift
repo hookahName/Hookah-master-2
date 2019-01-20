@@ -42,7 +42,20 @@ class ThirdViewController: UITableViewController, UINavigationControllerDelegate
         cell.nameLabel.text = flavour.name
         cell.photoImage.image = flavour.photoImage
         
+        if false {
+            cell.textLabel?.isEnabled = false
+            cell.selectionStyle = .none
+        }
+        
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        guard let cell = tableView.cellForRow(at: indexPath) else {return nil}
+        if cell.selectionStyle == .none {
+            return nil
+        }
+        return indexPath
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -75,9 +88,11 @@ class ThirdViewController: UITableViewController, UINavigationControllerDelegate
         }
     }
     */
+    /*
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(144)
     }
+    */
     
     private func loadSampleFlavours() {
         guard let selectedTabacoo = selectedTabacoo else { return }

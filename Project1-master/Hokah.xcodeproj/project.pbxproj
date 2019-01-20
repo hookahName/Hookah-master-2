@@ -10,7 +10,6 @@
 		222B8DB721E9F8A300CF4431 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 222B8DB621E9F8A300CF4431 /* GoogleService-Info.plist */; };
 		22404B3021EA4D6B00DF041C /* TobaccoClassForDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22404B2F21EA4D6B00DF041C /* TobaccoClassForDB.swift */; };
 		2265D20121EA07740093ABD3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2265D20021EA07740093ABD3 /* Main.storyboard */; };
-		2265D20321EA08C00093ABD3 /* AddTobaccoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2265D20221EA08C00093ABD3 /* AddTobaccoViewController.swift */; };
 		7157316790B458B34EA9F430 /* Pods_Hokah.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B6278C823D3E93911490742 /* Pods_Hokah.framework */; };
 		ED18062921E23AB1006148BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED18062821E23AB1006148BE /* AppDelegate.swift */; };
 		ED18062B21E23AB1006148BE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED18062A21E23AB1006148BE /* ViewController.swift */; };
@@ -32,7 +31,6 @@
 		222B8DB621E9F8A300CF4431 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		22404B2F21EA4D6B00DF041C /* TobaccoClassForDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TobaccoClassForDB.swift; sourceTree = "<group>"; };
 		2265D20021EA07740093ABD3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		2265D20221EA08C00093ABD3 /* AddTobaccoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTobaccoViewController.swift; sourceTree = "<group>"; };
 		B1410928FA4C41FB94A139DE /* Pods-Hokah.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Hokah.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Hokah/Pods-Hokah.debug.xcconfig"; sourceTree = "<group>"; };
 		ED18062521E23AB1006148BE /* Hokah.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hokah.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED18062821E23AB1006148BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -101,19 +99,15 @@
 			isa = PBXGroup;
 			children = (
 				2265D20021EA07740093ABD3 /* Main.storyboard */,
-				EDABF6C221F40E1300C73656 /* AdminTableViewController.swift */,
 				ED18062821E23AB1006148BE /* AppDelegate.swift */,
-				ED18062A21E23AB1006148BE /* ViewController.swift */,
-				ED18063C21E23E7A006148BE /* SeconViewController.swift */,
-				ED18063E21E24772006148BE /* ThirdViewController.swift */,
-				ED18064021E24EAB006148BE /* Result.swift */,
+				EDB9BF9F21F508B5007EAC9E /* UserViews */,
+				EDB9BF9E21F5087F007EAC9E /* AdminViews */,
 				ED18064B21E27039006148BE /* Classes */,
 				ED18064621E267F9006148BE /* Cells */,
 				ED18062F21E23AB3006148BE /* Assets.xcassets */,
 				ED18063121E23AB3006148BE /* LaunchScreen.storyboard */,
 				ED18063421E23AB3006148BE /* Info.plist */,
 				222B8DB621E9F8A300CF4431 /* GoogleService-Info.plist */,
-				2265D20221EA08C00093ABD3 /* AddTobaccoViewController.swift */,
 			);
 			path = Hokah;
 			sourceTree = "<group>";
@@ -135,6 +129,25 @@
 				ED18064C21E29A9F006148BE /* Flavour.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		EDB9BF9E21F5087F007EAC9E /* AdminViews */ = {
+			isa = PBXGroup;
+			children = (
+				EDABF6C221F40E1300C73656 /* AdminTableViewController.swift */,
+			);
+			path = AdminViews;
+			sourceTree = "<group>";
+		};
+		EDB9BF9F21F508B5007EAC9E /* UserViews */ = {
+			isa = PBXGroup;
+			children = (
+				ED18062A21E23AB1006148BE /* ViewController.swift */,
+				ED18063C21E23E7A006148BE /* SeconViewController.swift */,
+				ED18063E21E24772006148BE /* ThirdViewController.swift */,
+				ED18064021E24EAB006148BE /* Result.swift */,
+			);
+			path = UserViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -264,7 +277,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2265D20321EA08C00093ABD3 /* AddTobaccoViewController.swift in Sources */,
 				EDABF6C321F40E1300C73656 /* AdminTableViewController.swift in Sources */,
 				22404B3021EA4D6B00DF041C /* TobaccoClassForDB.swift in Sources */,
 				ED18063D21E23E7A006148BE /* SeconViewController.swift in Sources */,

@@ -20,13 +20,6 @@ class SeconViewController: UITableViewController, UINavigationControllerDelegate
         title = "Choose tabacoo"
     }
     
-    
-    /*
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    */
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tobaccos.count
     }
@@ -35,27 +28,24 @@ class SeconViewController: UITableViewController, UINavigationControllerDelegate
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TabacoCell", for: indexPath)
         cell.textLabel?.text = tobaccos[indexPath.row].name
-        /*
-        if tobaccos[indexPath.row].isAvailable {
-            print("ok")
-            
-        } else {
+        
+        if !tobaccos[indexPath.row].isAvailable {
             print("ne ok")
-            cell.selectionStyle = .gray
+            cell.textLabel?.isEnabled = false
+            cell.selectionStyle = .none
         }
- */
-        cell.selectionStyle = .blue
+        
         return cell
     }
-    /*
+    
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        if indexPath.row == 2 {
-            
+        guard let cell = tableView.cellForRow(at: indexPath) else {return nil}
+        if cell.selectionStyle == .none {
             return nil
         }
         return indexPath
     }
-    */
+    
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         var messageText: String
         
@@ -73,11 +63,11 @@ class SeconViewController: UITableViewController, UINavigationControllerDelegate
         ac.addAction(UIAlertAction(title: "Ok", style: .default))
         present(ac, animated: true)
     }
-    
+    /*
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(144)
     }
-    
+    */
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ToFlavour" {
             guard let flavourController = segue.destination as? ThirdViewController else {return}
@@ -89,18 +79,4 @@ class SeconViewController: UITableViewController, UINavigationControllerDelegate
             }
         }
     }
-    /*
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if let tabacooo = storyboard?.instantiateViewController(withIdentifier: "Flavour") as? ThirdViewController {
-            tabacooo.selectedTabacoo = tabacoos[indexPath.row].name
-            
-            guard let selectedTable = selectedTable else { return }
-            tabacooo.table = selectedTable
-            
-            navigationController?.pushViewController(tabacooo, animated: true)
-            
-        }
-    }
-    */
 }
