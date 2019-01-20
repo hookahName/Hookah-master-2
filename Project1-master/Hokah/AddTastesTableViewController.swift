@@ -10,12 +10,12 @@ import UIKit
 import Firebase
 class AddTastesTableViewController: UITableViewController {
     
-    var ChosenTaste: String = ""
+    var ChosenTobacco: String = ""
     var ref: DatabaseReference!
     var tastes = Array<TasteDB>()
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Tastes"
+        title = ChosenTobacco
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -26,7 +26,7 @@ class AddTastesTableViewController: UITableViewController {
   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ref = Database.database().reference().child("tobaccos").child((self.ChosenTaste.lowercased())).child("tastes")
+        ref = Database.database().reference().child("tobaccos").child((self.ChosenTobacco.lowercased())).child("tastes")
         ref.observe(.value, with: { [weak self] (snapshot) in
             var _tastes = Array<TasteDB>()
             for i in snapshot.children{
@@ -64,7 +64,7 @@ class AddTastesTableViewController: UITableViewController {
     func updateDatabase() {
         ref = Database.database().reference()
         for taste in tastes {
-            ref.child("tobaccos").child((self.ChosenTaste.lowercased())).child("tastes").child(taste.name.lowercased()).setValue(taste.convertToDictionary())
+            ref.child("tobaccos").child((self.ChosenTobacco.lowercased())).child("tastes").child(taste.name.lowercased()).setValue(taste.convertToDictionary())
         }
     }
     
@@ -86,7 +86,7 @@ class AddTastesTableViewController: UITableViewController {
             
             guard let textField = alertController.textFields?.first, textField.text != "" else {return}
             let taste = TasteDB(name: textField.text!)
-            let tasteRef = self?.ref.child("tobaccos").child((self?.ChosenTaste.lowercased())!).child("tastes").child((taste?.name.lowercased())!)
+            let tasteRef = self?.ref.child("tobaccos").child((self?.ChosenTobacco.lowercased())!).child("tastes").child((taste?.name.lowercased())!)
             tasteRef?.setValue(taste!.convertToDictionary())
             //self?.tobaccos.append(tabaco!)
             //self?.tableView.reloadData()
