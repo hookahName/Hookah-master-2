@@ -68,14 +68,14 @@ class ThirdViewController: UITableViewController, UINavigationControllerDelegate
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ToResult" {
-            guard let resultController = segue.destination as? Result else {return}
+        if segue.identifier == "ToTime" {
+            guard let timeController = segue.destination as? ChooseTimeViewController else {return}
             
             if let indexPath = tableView.indexPathForSelectedRow {
                 
-                resultController.selectedTable = table
-                resultController.selectedTabacoo = selectedTabacoo
-                resultController.selectedFlavour = tastes[indexPath.row].name
+                timeController.selectedTable = table
+                timeController.selectedTabacoo = selectedTabacoo
+                timeController.selectedFlavour = tastes[indexPath.row].name
             }
         }
     }

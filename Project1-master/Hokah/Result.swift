@@ -13,10 +13,12 @@ class Result: UIViewController, UINavigationControllerDelegate {
     var selectedTable: Int?
     var selectedTabacoo: String?
     var selectedFlavour: String?
+    var selectedTime: String?
     
     @IBOutlet weak var tableNumber: UILabel!
     @IBOutlet weak var tabacoo: UILabel!
     @IBOutlet weak var flavour: UILabel!
+    @IBOutlet weak var TimeLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +26,12 @@ class Result: UIViewController, UINavigationControllerDelegate {
         guard let selectedTable = selectedTable else { return }
         guard let selectedTabacoo = selectedTabacoo else { return }
         guard let selectedFlavour = selectedFlavour else { return }
+        guard let selectedTime = selectedTime else { return }
         
         tableNumber.text = "Table \(selectedTable+1)"
         tabacoo.text = selectedTabacoo
         flavour.text = selectedFlavour
+        TimeLabel.text = "Ждем вас в \(String(describing: selectedTime))"
     }
     
     
