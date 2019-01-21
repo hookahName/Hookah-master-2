@@ -10,12 +10,14 @@ import UIKit
 import Firebase
 class AddTastesTableViewController: UITableViewController {
     
-    var ChosenTobacco: String = ""
+    var chosenTobacco: TobaccoDB?
     var ref: DatabaseReference!
     var tastes = Array<TasteDB>()
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = ChosenTobacco
+        if let chosenTobacco = chosenTobacco {
+            title = chosenTobacco.name
+        }
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -26,7 +28,8 @@ class AddTastesTableViewController: UITableViewController {
   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        ref = Database.database().reference().child("tobaccos").child((self.ChosenTobacco.lowercased())).child("tastes")
+        guard let chosenTobacco = chosenTobacco else {return}
+        ref = Database.database().reference().child("tobaccos").child((chosenTobacco.name.lowercased())).child("tastes")
         ref.observe(.value, with: { [weak self] (snapshot) in
             var _tastes = Array<TasteDB>()
             for i in snapshot.children{
@@ -39,10 +42,15 @@ class AddTastesTableViewController: UITableViewController {
             self?.tableView.reloadData()
         })
         
-        
     }
     // MARK: - Table view data source
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        getAvailabilityOfTobacco()
+        ref.removeAllObservers()
+    }
+ 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TasteCell", for: indexPath)
         cell.textLabel?.text = tastes[indexPath.row].name
@@ -58,14 +66,12 @@ class AddTastesTableViewController: UITableViewController {
     
     @objc func switchChanged(_ sender: UISwitch!) {
         tastes[sender.tag].isAvailable = !tastes[sender.tag].isAvailable
-        updateDatabase()
+        updateDatabase(tastes[sender.tag])
     }
     
-    func updateDatabase() {
+    func updateDatabase(_ taste: TasteDB) {
         ref = Database.database().reference()
-        for taste in tastes {
-            ref.child("tobaccos").child((self.ChosenTobacco.lowercased())).child("tastes").child(taste.name.lowercased()).setValue(taste.convertToDictionary())
-        }
+        ref.child("tobaccos").child(chosenTobacco!.name).child("tastes").child(taste.name).updateChildValues(["name": taste.name, "isAvailable": taste.isAvailable])
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -78,7 +84,7 @@ class AddTastesTableViewController: UITableViewController {
         return tastes.count
     }
     
-    @IBAction func AddButton(_ sender: UIBarButtonItem) {
+    @IBAction func addButton(_ sender: UIBarButtonItem) {
         ref = Database.database().reference()
         let alertController = UIAlertController(title: "New taste", message: "Add new taste", preferredStyle: .alert)
         alertController.addTextField()
@@ -86,7 +92,7 @@ class AddTastesTableViewController: UITableViewController {
             
             guard let textField = alertController.textFields?.first, textField.text != "" else {return}
             let taste = TasteDB(name: textField.text!)
-            let tasteRef = self?.ref.child("tobaccos").child((self?.ChosenTobacco.lowercased())!).child("tastes").child((taste?.name.lowercased())!)
+            let tasteRef = self?.ref.child("tobaccos").child(((self?.chosenTobacco!.name.lowercased())!)).child("tastes").child((taste?.name.lowercased())!)
             tasteRef?.setValue(taste!.convertToDictionary())
             //self?.tobaccos.append(tabaco!)
             //self?.tableView.reloadData()
@@ -97,6 +103,25 @@ class AddTastesTableViewController: UITableViewController {
         alertController.addAction(save)
         alertController.addAction(cancel)
         present(alertController, animated: true)
+    }
+    
+    private func getAvailabilityOfTobacco() {
+        ref = Database.database().reference()
+        var isAvailable: Bool = false
+        
+        if tastes.count > 0 {
+            for taste in tastes {
+                if taste.isAvailable {
+                    isAvailable = true
+                    break
+                }
+            }
+            chosenTobacco?.isAvailable = isAvailable
+            ref.child("tobaccos").child(chosenTobacco!.name).updateChildValues(["name":chosenTobacco!.name, "isAvailable": chosenTobacco!.isAvailable])
+        } else {
+            chosenTobacco?.isAvailable = isAvailable
+            ref.child("tobaccos").child(chosenTobacco!.name).updateChildValues(["name":chosenTobacco!.name, "isAvailable": chosenTobacco!.isAvailable])
+        }
     }
     
     /*

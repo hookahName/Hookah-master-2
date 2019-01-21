@@ -97,7 +97,7 @@ class AdminTableViewController: UITableViewController {
         if segue.identifier == "AddTastes" {
             guard let taste = segue.destination as? AddTastesTableViewController else {return}
             if let indexPath = tableView.indexPathForSelectedRow {
-                taste.ChosenTobacco = tobaccos[indexPath.row].name
+                taste.chosenTobacco = tobaccos[indexPath.row]
             }
         }
     }
