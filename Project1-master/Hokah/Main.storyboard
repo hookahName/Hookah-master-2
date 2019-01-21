@@ -156,7 +156,7 @@
             </objects>
             <point key="canvasLocation" x="1916" y="158"/>
         </scene>
-        <!--Third View Controller-->
+        <!--Title-->
         <scene sceneID="uGZ-ZS-HxN">
             <objects>
                 <tableViewController storyboardIdentifier="Flavour" id="rOD-Rh-l5O" customClass="ThirdViewController" customModule="Hokah" customModuleProvider="target" sceneMemberID="viewController">
@@ -172,9 +172,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="143.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="62v-KC-sj4" kind="show" identifier="ToResult" id="tFi-sg-xeP"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -182,6 +179,13 @@
                             <outlet property="delegate" destination="rOD-Rh-l5O" id="KBS-nq-m9e"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Title" id="glP-FA-RYI">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="sYs-1M-dde">
+                            <connections>
+                                <segue destination="62v-KC-sj4" kind="show" identifier="ToResult" id="NWe-Qu-dQH"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pk7-2W-KKH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

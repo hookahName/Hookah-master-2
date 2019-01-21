@@ -27,14 +27,13 @@ class ViewController: UITableViewController {
             self?.tobaccos = _tobaccos
             self?.tableView.reloadData()
         })
-        
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Choose table"
+        tableView.tableFooterView = UIView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -69,15 +68,6 @@ class ViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 tobaco.selectedTable = indexPath.row
             }
-
-            
-        }
-    }
-    
-    @IBAction func unwindToMainScreen(segue: UIStoryboardSegue) {
-        if segue.identifier == "unwindSegue" {
-            guard let controller = segue.source as? AdminTableViewController else {return}
-            self.tobaccos = controller.tobaccos
         }
     }
 }
