@@ -14,6 +14,7 @@ class Result: UIViewController, UINavigationControllerDelegate {
     var selectedTabacoo: String?
     var selectedFlavour: String?
     var selectedTime: String?
+    var selectedTea: String?
     
     @IBOutlet weak var tableNumber: UILabel!
     @IBOutlet weak var tabacoo: UILabel!
@@ -32,6 +33,7 @@ class Result: UIViewController, UINavigationControllerDelegate {
         tabacoo.text = selectedTabacoo
         flavour.text = selectedFlavour
         TimeLabel.text = "Ждем вас в \(String(describing: selectedTime))"
+        print(selectedTea)
     }
     
     
